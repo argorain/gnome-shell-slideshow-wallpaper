@@ -40,6 +40,7 @@ static void slideshow_app_init (SlideshowApp *app)
 
 static void quit_activated (GSimpleAction *action, GVariant *parameter, gpointer app)
 {
+  dbg("app quit");
   g_application_quit (G_APPLICATION (app));
 }
 
@@ -69,11 +70,14 @@ static void slideshow_app_startup (GApplication *app)
   //app_menu = G_MENU_MODEL (gtk_builder_get_object (builder, "appmenu"));
   //gtk_application_set_app_menu (GTK_APPLICATION (app), app_menu);
   //g_object_unref (builder);
+  dbg("startup");
 }
 
 static void slideshow_app_activate (GApplication *app)
 {
   SlideshowAppWindow *win;
+
+  dbg("activate");
 
   win = slideshow_app_window_new (SLIDESHOW_APP (app));
   gtk_window_present (GTK_WINDOW (win));
@@ -84,6 +88,8 @@ static void slideshow_app_open (GApplication *app, GFile **files, gint n_files, 
   GList *windows;
   SlideshowAppWindow *win;
   int i;
+
+  dbg("app open");
 
   windows = gtk_application_get_windows (GTK_APPLICATION (app));
   if (windows)
@@ -99,6 +105,8 @@ static void slideshow_app_open (GApplication *app, GFile **files, gint n_files, 
 
 static void slideshow_app_class_init (SlideshowAppClass *class)
 {
+  dbg("class init");
+
   G_APPLICATION_CLASS (class)->startup = slideshow_app_startup;
   G_APPLICATION_CLASS (class)->activate = slideshow_app_activate;
   G_APPLICATION_CLASS (class)->open = slideshow_app_open;
@@ -106,6 +114,8 @@ static void slideshow_app_class_init (SlideshowAppClass *class)
 
 SlideshowApp * slideshow_app_new (void)
 {
+  dbg("app new");
+
   return g_object_new (SLIDESHOW_APP_TYPE,
                        "application-id", "org.gtk.slideshow",
                        "flags", G_APPLICATION_HANDLES_OPEN,
