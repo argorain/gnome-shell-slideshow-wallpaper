@@ -2,6 +2,7 @@
 
 #include "slideshow.h"
 #include "slideshowwin.h"
+#include "debug.h"
 
 struct _SlideshowAppWindow
 {
@@ -31,8 +32,7 @@ struct _SlideshowAppWindowPrivate
 
 G_DEFINE_TYPE_WITH_PRIVATE(SlideshowAppWindow, slideshow_app_window, GTK_TYPE_APPLICATION_WINDOW);
 
-static void
-search_text_changed (GtkEntry *entry)
+static void search_text_changed (GtkEntry *entry)
 {
   SlideshowAppWindow *win;
   SlideshowAppWindowPrivate *priv;
@@ -65,9 +65,7 @@ search_text_changed (GtkEntry *entry)
     }
 }
 
-static void
-find_word (GtkButton        *button,
-           SlideshowAppWindow *win)
+static void find_word (GtkButton *button, SlideshowAppWindow *win)
 {
   SlideshowAppWindowPrivate *priv;
   const gchar *word;
@@ -78,8 +76,7 @@ find_word (GtkButton        *button,
   gtk_entry_set_text (GTK_ENTRY (priv->searchentry), word);
 }
 
-static void
-update_words (SlideshowAppWindow *win)
+static void update_words (SlideshowAppWindow *win)
 {
   SlideshowAppWindowPrivate *priv;
   GHashTable *strings;
@@ -138,8 +135,7 @@ done:
   g_hash_table_unref (strings);
 }
 
-static void
-update_lines (SlideshowAppWindow *win)
+static void update_lines (SlideshowAppWindow *win)
 {
   SlideshowAppWindowPrivate *priv;
   GtkWidget *tab, *view;
@@ -173,9 +169,7 @@ update_lines (SlideshowAppWindow *win)
   g_free (lines);
 }
 
-static void
-visible_child_changed (GObject    *stack,
-                       GParamSpec *pspec)
+static void visible_child_changed (GObject *stack, GParamSpec *pspec)
 {
   SlideshowAppWindow *win;
   SlideshowAppWindowPrivate *priv;
@@ -190,16 +184,12 @@ visible_child_changed (GObject    *stack,
   update_lines (win);
 }
 
-static void
-words_changed (GObject          *sidebar,
-               GParamSpec       *pspec,
-               SlideshowAppWindow *win)
+static void words_changed (GObject *sidebar, GParamSpec *pspec, SlideshowAppWindow *win)
 {
   update_words (win);
 }
 
-static void
-slideshow_app_window_init (SlideshowAppWindow *win)
+static void slideshow_app_window_init (SlideshowAppWindow *win)
 {
   SlideshowAppWindowPrivate *priv;
   GtkBuilder *builder;
@@ -246,8 +236,7 @@ slideshow_app_window_init (SlideshowAppWindow *win)
   gtk_application_window_set_show_menubar (GTK_APPLICATION_WINDOW (win), TRUE);
 }
 
-static void
-slideshow_app_window_dispose (GObject *object)
+static void slideshow_app_window_dispose (GObject *object)
 {
   SlideshowAppWindow *win;
   SlideshowAppWindowPrivate *priv;
@@ -260,8 +249,7 @@ slideshow_app_window_dispose (GObject *object)
   G_OBJECT_CLASS (slideshow_app_window_parent_class)->dispose (object);
 }
 
-static void
-slideshow_app_window_class_init (SlideshowAppWindowClass *class)
+static void slideshow_app_window_class_init (SlideshowAppWindowClass *class)
 {
   G_OBJECT_CLASS (class)->dispose = slideshow_app_window_dispose;
 
@@ -282,15 +270,12 @@ slideshow_app_window_class_init (SlideshowAppWindowClass *class)
   gtk_widget_class_bind_template_callback (GTK_WIDGET_CLASS (class), visible_child_changed);
 }
 
-SlideshowAppWindow *
-slideshow_app_window_new (SlideshowApp *app)
+SlideshowAppWindow* slideshow_app_window_new (SlideshowApp *app)
 {
   return g_object_new (SLIDESHOW_APP_WINDOW_TYPE, "application", app, NULL);
 }
 
-void
-slideshow_app_window_open (SlideshowAppWindow *win,
-                         GFile            *file)
+void slideshow_app_window_open (SlideshowAppWindow *win, GFile *file)
 {
   SlideshowAppWindowPrivate *priv;
   gchar *basename;
