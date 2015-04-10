@@ -30,5 +30,5 @@ clean:
 	rm -f org.gtk.slideshow.gschema.valid
 	rm -f gschemas.compiled
 	rm -f resources.c
-	rm -f $(OBJS)
+	find ./*.o -delete
 	rm -f slideshow
