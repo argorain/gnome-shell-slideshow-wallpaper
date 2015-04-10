@@ -5,7 +5,7 @@ LIBS = `$(PKGCONFIG) --libs gtk+-3.0`
 GLIB_COMPILE_RESOURCES = `$(PKGCONFIG) --variable=glib_compile_resources gio-2.0`
 GLIB_COMPILE_SCHEMAS = `$(PKGCONFIG) --variable=glib_compile_schemas gio-2.0`
 
-SRC = resources.c slideshow.c slideshowwin.c main.c
+SRC = resources.c debug.h slideshow.c slideshowwin.c main.c
 
 OBJS = $(SRC:.c=.o)
 

@@ -2,7 +2,6 @@
 <gresources>
   <gresource prefix="/org/gtk/slideshow">
     <file preprocess="xml-stripblanks">window.ui</file>
-    <file preprocess="xml-stripblanks">menu.ui</file>
     <file preprocess="xml-stripblanks">gears-menu.ui</file>
   </gresource>
 </gresources>
