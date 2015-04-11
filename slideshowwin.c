@@ -1,8 +1,9 @@
 #include <gtk/gtk.h>
 
+#include "debug.h"
 #include "slideshow.h"
 #include "slideshowwin.h"
-#include "debug.h"
+
 
 struct _SlideshowAppWindow
 {

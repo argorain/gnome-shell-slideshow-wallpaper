@@ -6,9 +6,9 @@
 #define DEBUG
 
 #ifdef DEBUG
-inline void dbg(char *msg){printf("[DEBUG] %s\n", msg);}
+#define DBG(msg) printf("[DEBUG] %s\n", msg);
 #else
-inline void dbg(char *msg){}
+#define DBG(msg)
 #endif
 
 #endif // __DEBUG_H__
